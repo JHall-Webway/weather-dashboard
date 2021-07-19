@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700&display=swap" rel="stylesheet">
-    <title>Dashboard</title>
+    <title>Weather Dashboard</title>
 </head>
 
 <body class="container-fluid">
@@ -24,7 +24,7 @@
         <div class="col-12 col-lg-3">
             <form class="search-col">
                 <h2>Search for a City:</h2>
-                <input type="text" id="city-input" class="form-control mb-3"/>
+                <input type="text" id="city-input" class="form-control mb-3" />
                 <button type="submit" id="city-input" class="btn search-btn mb-3">Search</button>
             </form>
             <hr style="height: 4px;" />
@@ -34,38 +34,7 @@
             </form>
         </div>
         <div class="forecast-col col-12 col-lg-9">
-            <div class="row">
-                <div class="col-12 border border-dark">
-                    <h2>Flagstaff (7/18/2021)<i class="fas fa-cloud-sun"></i></h2>
-                    <p>Temp: 74.01 degF</p>
-                    <p>Wind: 6.87 MPH</p>
-                    <p>Humidity: 46 %</p>
-                    <p>UV Index: <span class="badge bg-success">0.47</span></p>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex row justify-content-between fs-mlg-5">
-                        <h3 class="col-12">5-Day Forecast:</h3>
-                        <div class="col-12 col-md-2 border card forecast-card">
-                            <div class="card-body">
-                                <h4 class="card-title">3/31/2021</h4>
-                                <i class="forecast-icon fas fa-cloud-sun"></i>
-                                <p class="card-text">
-                                    Temp: 73.72 degF
-                                </p>
-                                <p class="card-text">
-                                    Wind: 9.53 MPH
-                                </p>
-                                <p class="card-text">
-                                    Humidity: 66%
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-2 border">2</div>
-                        <div class="col-2 border">3</div>
-                        <div class="col-2 border">4</div>
-                        <div class="col-2 border">5</div>
-                    </div>
-                </div>
+            <div class="row forecast-row">
             </div>
         </div>
     </div>

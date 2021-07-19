@@ -45,6 +45,26 @@ body {
     background-color: var(--dark);
 }
 
+.uvi-low {
+    background-color: green;
+}
+
+.uvi-moderate {
+    background-color: yellow;
+}
+
+.uvi-high {
+    background-color: orange;
+}
+
+.uvi-very-high {
+    background-color: red;
+}
+
+.uvi-extreme {
+    background-color: purple;
+}
+
 @media screen and (max-width: 992px) {
    .forecast-col {
        order: -1;
