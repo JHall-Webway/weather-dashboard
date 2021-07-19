@@ -1,8 +1,46 @@
+var searchedCityArray = JSON.parse(localStorage.getItem("cities"));
+
+if (!searchedCityArray) {
+    searchedCityArray = [];
+    localStorage.setItem("cities", JSON.stringify(searchedCityArray))
+}
+
+function loadSearch() {
+
+    $(".city-btn").remove();
+
+    for (let i = 0; i < searchedCityArray.length; i++) {
+        $("<button>")
+            .addClass("btn city-btn mb-3")
+            .html(searchedCityArray[i])
+            .appendTo($(".saved-col"));
+    };
+
+    $(".saved-col").on("click", ".city-btn", function (event) {
+        event.preventDefault();
+        buttonCity = $(this).text().toLowerCase();
+        getCoordinates(buttonCity);
+    });
+};
+
+function buttonMaker(city) {
+    $("<button>")
+        .addClass("btn city-btn mb-3")
+        .text(city)
+        .appendTo($(".saved-col"));
+
+    searchedCityArray = searchedCityArray.filter(e => e !== city);
+
+    searchedCityArray.unshift(city);
+    localStorage.setItem("cities", JSON.stringify(searchedCityArray));
+    loadSearch();
+}
+
 function getCoordinates(city) {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=7a31f75531bd46ded33bdb3c9d2612a9")
         .then(function (response) {
             if (response.ok) {
-                return response.json()
+                return response.json();
             } else {
                 alert("ERROR")
             }
@@ -52,9 +90,9 @@ function displayWeather(current, forecast) {
     var todaysForecast = $("<div>")
         .addClass("col-12 border border-dark");
     var todayName = $("<h2>")
-        .html(current.name + " (" + date.toLocaleString() + ") <img src='http://openweathermap.org/img/wn/" + current.weather[0].icon + ".png' />");
+        .html(current.name + " (" + date.toLocaleString().split(",")[0] + ") <img src='http://openweathermap.org/img/wn/" + current.weather[0].icon + ".png' />");
     var todayTemp = $("<p>")
-        .text("Temperature: " + Math.floor(((current.main.temp - 273.15) * 9/5 + 32)) + " °F");
+        .text("Temperature: " + Math.floor(((current.main.temp - 273.15) * 9 / 5 + 32)) + " °F");
     var todayWind = $("<p>")
         .text("Wind: " + current.wind.speed + " MPH");
     var todayHum = $("<p>")
@@ -90,7 +128,7 @@ function displayWeather(current, forecast) {
         var cardIcon = $("<img src='http://openweathermap.org/img/wn/" + dayObj.weather[0].icon + ".png' />");
         var cardTemp = $("<p>")
             .addClass("card-text")
-            .text("Temp: " + Math.floor(((dayObj.temp.day - 273.15) * 9/5 + 32)) + "°F");
+            .text("Temp: " + Math.floor(((dayObj.temp.day - 273.15) * 9 / 5 + 32)) + "°F");
         var cardWind = $("<p>")
             .addClass("card-text")
             .text("Wind: " + dayObj.wind_speed + " MPH");
@@ -107,16 +145,17 @@ function displayWeather(current, forecast) {
         cardEl
             .appendTo(forecastDiv);
     }
-}
+};
 
 //Search Listeners
 $(".search-col").on("submit", function (event) {
     event.preventDefault();
-    searchTerm = $("#city-input").val().toLowerCase();
-    getCoordinates(searchTerm);
+    searchTerm = $("#city-input").val().trim().toLowerCase();
+    if (searchTerm.length != 0) {
+        getCoordinates(searchTerm);
+        buttonMaker(searchTerm);
+        $(".input-field").val("");
+    }
 });
-$(".saved-col").on("click", ".city-btn", function (event) {
-    event.preventDefault();
-    buttonCity = $(this).text().toLowerCase();
-    getCoordinates(buttonCity);
-});
+
+loadSearch();

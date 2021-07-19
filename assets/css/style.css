@@ -50,14 +50,17 @@ body {
 }
 
 .uvi-moderate {
+    color: black;
     background-color: yellow;
 }
 
 .uvi-high {
+    color: black;
     background-color: orange;
 }
 
 .uvi-very-high {
+    color: black;
     background-color: red;
 }
 
