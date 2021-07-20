@@ -4,7 +4,7 @@ var searchedCityArray = JSON.parse(localStorage.getItem("cities"));
 if (!searchedCityArray) {
     searchedCityArray = [];
     localStorage.setItem("cities", JSON.stringify(searchedCityArray))
-}
+};
 //Creates buttons for existing searches
 function loadSearch() {
     //Removes any existing buttons
@@ -33,7 +33,7 @@ function buttonMaker(city) {
     localStorage.setItem("cities", JSON.stringify(searchedCityArray));
     //Loads new array
     loadSearch();
-}
+};
 //Fetches city coordinates from Openweather
 function getCoordinates(city) {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=4493e550e9acf995029c8985968d6001")
@@ -47,7 +47,7 @@ function getCoordinates(city) {
             getForecast(data);
         })
         .catch(function (error) {
-            alert("Unable to connect to Openweather");
+            alert("Unable retrieve city from Openweather");
         });
 };
 //Fetches forecast data from Openweather
@@ -57,7 +57,7 @@ function getForecast(city) {
             if (response.ok) {
                 return response.json()
             } else {
-                alert("ERROR")
+                alert("ERROR");
             }
         })
         .then(function (data) {
